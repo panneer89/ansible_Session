@@ -1,0 +1,11 @@
+---
+- hosts: target
+  become: yes
+  roles:
+    - play
+  
+
+- hosts: master
+  become: yes
+  roles:
+    - play1
