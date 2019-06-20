@@ -1,0 +1,8 @@
+---
+# tasks file for play1
+
+- name: add worker node
+  command: sudo -i -u postgres psql -c "SELECT * from master_add_node('{{ item }}', 5432);"
+  with_items:
+    - 100.24.17.245
+    - 54.145.148.115
