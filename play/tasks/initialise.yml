@@ -1,0 +1,12 @@
+---
+# play/tasks/initialise.yml
+
+- name: initialize system database
+  command: sudo /usr/pgsql-11/bin/postgresql-11-setup initdb
+  ignore_errors: true
+
+- name: preload citus extension
+  lineinfile:
+    path: '/var/lib/pgsql/11/data/postgresql.conf'
+    insertafter: EOF
+    line: shared_preload_libraries = 'citus'

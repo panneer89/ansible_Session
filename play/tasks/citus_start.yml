@@ -1,0 +1,13 @@
+---
+- name: start postgres
+  service: name=postgresql-11 state=restarted
+
+- name: make it start automatically
+  command: sudo chkconfig postgresql-11 on
+  ignore_errors: true
+
+- name: citus extension to every database
+#  postgresql_ext:
+#    name: citus
+#    db: postgres
+  command: sudo -i -u postgres psql -c "CREATE EXTENSION citus;"

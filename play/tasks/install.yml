@@ -1,0 +1,19 @@
+---
+# play/tasks/install.yml
+
+- name: Install citus from remote package
+  get_url:
+    url: https://install.citusdata.com/community/rpm.sh
+    dest: /tmp
+    
+- name: execute shell
+  command: chmod +x /tmp/rpm.sh
+
+- shell: /tmp/rpm.sh
+     
+- name: Install {{ item }}
+  yum: name={{ item }} state=present
+  with_items: 
+    - citus82_11
+    - postgresql-libs
+    - python-psycopg2
